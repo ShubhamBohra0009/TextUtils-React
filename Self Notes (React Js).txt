@@ -105,4 +105,47 @@ btn-outline-primary // for blue
 btn-outline-danger // for red
 Can prefer getbootstrap.com for further information 
 
+One of the way of applying css styles in components is to use style tag with having a varaible as it's value and then defining that object within the rfc function
+eg. style= {myStyle} where myStyle is a function
+// Another and better way is useState because by declaring useState we can change the state of css styles according to our need.
 
+We can create useState in app.js to control things for eg. theme modes of components
+//imrs for importing react and useState from react
+
+We can use tempelate literals `` which are inside backticks in order to update the data with ${}
+
+There is a syntax such that if that condition is true only then run the rest of the code , it can be done with simple if else too 
+eg. props.alert && ..............rest of the code...................
+This happens because all the JSX will be converted to Javascript calls!
+
+we can change the meta data for better seo 
+project title can also be changed by document.title="name of title";
+
+//routers
+routers are used so that we can navigate through different components without reloading the page for eg. home about contacts
+for installing routers //npm install react-router-dom is used
+
+for importing routers from react: 
+import{
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Routes,
+    Link
+} from "react-router-dom";
+
+and for Switch
+<Router>
+          <Routes>
+          <Route path='/about' element={<AboutNew mode={mode}/>}/>
+          <Route path="/"  element={<TextForm heading="Enter the text to analyze" mode={mode} showAlert={showAlert}/>} />
+        </Routes>
+</Router>
+
+for the navigation purpose of router which means to reach on the page by clicking in nav bar 
+first change the anchor tags a to Link tag and href To to tag 
+
+// we can use exact in route for exact matching
+
+
+        
