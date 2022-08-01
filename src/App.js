@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-import About from './components/About';
+// import About from './components/About';
 import AboutNew from './components/AboutNew';
 import Alert from './components/Alert';
 import React, {useState} from 'react'
