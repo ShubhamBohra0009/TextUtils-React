@@ -57,12 +57,12 @@ export default function TextForm(props) {
 <div className="mb-3">
   <textarea className="form-control" value={text} onChange={handleOnChange} style ={{backgroundColor : props.mode==="dark" ? '#042743' : 'white' , color : props.mode==="dark" ? 'white' : 'black' }}  id="myBox" rows="8"></textarea>
 </div>
-<button className="btn btn-primary mx-1 my-1" disabled={text.length==0} onClick={handleUpClick}>Convert to Uppercase</button>
-<button className="btn btn-primary mx-1 my-1" disabled={text.length==0} onClick={handleLoClick}>Convert to Lowercase</button>
-<button className="btn btn-primary mx-1 my-1" disabled={text.length==0} onClick={handleCapitalizeClick}>Capitalize</button>
-<button className="btn btn-primary mx-1 my-1" disabled={text.length==0} onClick={handleCopy}>Copy Text</button>
-<button className="btn btn-primary mx-1 my-1" disabled={text.length==0} onClick={handleExtraSpaces}>Remove Extra Spaces</button>
-<button className="btn btn-primary mx-1 my-1" disabled={text.length==0} onClick={handleClearClick}>Clear Text</button>
+<button className="btn btn-primary mx-1 my-1" disabled={text.length===0} onClick={handleUpClick}>Convert to Uppercase</button>
+<button className="btn btn-primary mx-1 my-1" disabled={text.length===0} onClick={handleLoClick}>Convert to Lowercase</button>
+<button className="btn btn-primary mx-1 my-1" disabled={text.length===0} onClick={handleCapitalizeClick}>Capitalize</button>
+<button className="btn btn-primary mx-1 my-1" disabled={text.length===0} onClick={handleCopy}>Copy Text</button>
+<button className="btn btn-primary mx-1 my-1" disabled={text.length===0} onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+<button className="btn btn-primary mx-1 my-1" disabled={text.length===0} onClick={handleClearClick}>Clear Text</button>
     </div>
 
     <div className="container my-3" style={{color : props.mode==="dark" ? 'white' : 'black'}}>
