@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-// import About from './components/About';
+import About from './components/About';
 import AboutNew from './components/AboutNew';
 import Alert from './components/Alert';
 import React, {useState} from 'react'
@@ -49,9 +49,7 @@ function App() {
   return (
     <>
     <Router>
-{/* <Navbar/> */}
-{/* <Navbar title="TextUtils" aboutText="About TextUtils" mode={mode} toggleMode={toggleMode}/> */}
-<Navbar title="TextUtils" mode={mode} toggleMode={toggleMode}/>
+<Navbar title="TextUtils" aboutText="About" mode={mode} toggleMode={toggleMode}/>
 <Alert alert={alert}/> 
   
 <div className="container my-3">
@@ -59,9 +57,9 @@ function App() {
             {/* /users ---> Component 1 
             /users/home ---> Component 2 */}
               <Route exact path='/about' element={<AboutNew mode={mode}/>}/>
-              <Route exact path="/"  element={<TextForm heading="Enter the text to analyze" mode={mode} showAlert={showAlert}/>} />
+              <Route exact path="/"  element={<TextForm  mode={mode} showAlert={showAlert} heading=" Try TextUtils - Word Counter, Character Counter, Remove extra spaces"/>} />
         </Routes>
-{/* <AboutNew mode={mode}/> */}
+{/* <About mode={mode}/> */}
 </div>
     </Router>
 
