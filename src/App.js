@@ -1,75 +1,33 @@
 import React, {useEffect, useRef, useState} from 'react'
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-import AboutNew from './components/AboutNew';
-import Alert from './components/Alert';
+import About from './components/About';
+import  {Alert,modeRender, showAlert} from './components/Alert';
 import {BrowserRouter,Route,Routes} from "react-router-dom";
+import Footer from './components/Footer';
 
 function App() {
-
-  const [mode, setMode] = useState('dark'); // Whether dark mode is enabled or not
+  const [darkmode, setDarkmode] = useState(true); // Whether dark mode is enabled or not
   const [alert, setAlert] = useState(null);  
   const renderCount = useRef(0);
-
- const showAlert = (message,type)=>{
-  setAlert({
-    msg: message,
-    type: type
-  })
-  setTimeout(() => {
-    setAlert(null);
-  }, 1500);
- };
- 
- useEffect((e) => {
-  if(mode === "light" ){
-    document.body.style.backgroundColor = 'white';
-    showAlert("Light mode has been enabled", "success");
-      // document.title = 'TextAnalyzer - Light Mode'
-    renderCount.current+=1;
-  }
-  else if(mode === "dark"){
-      document.body.style.backgroundColor = '#042743';
-     if(renderCount.current>0){
-       showAlert("Dark mode has been enabled", "success");
-     }
-    //  document.title = 'TextAnalyzer - Dark Mode'
-    }
-    
-  },[mode])
- 
-
- const toggleMode = (e)=>{
-    // e.stopPropagation();
-    if(mode === 'dark'){
-      setMode("light");
-    //   document.body.style.backgroundColor = '#042743';
-    //   // document.body.style.backgroundColor = 'grey';
-    //   showAlert("Dark mode has been enabled", "success");
-    //   // document.title = 'TextAnalyzer - Dark Mode'
-    }
-    else{
-      setMode("dark");
-    //   document.body.style.backgroundColor = 'white';
-    //   showAlert("Light mode has been enabled", "success");
-    //   // document.title = 'TextAnalyzer - Light Mode'
-    }
-  }
+  
+  useEffect(() => {
+     modeRender({darkmode,renderCount,setAlert});
+   },[darkmode])
 
   return (
     <>
     <BrowserRouter>
-    <Navbar title="TextAnalyzer" aboutText="About" mode={mode} toggleMode={toggleMode}/>
-    <Alert alert={alert}/> 
+    <Navbar title="TextAnalyzer" aboutText="About" darkmode={darkmode} setDarkmode={setDarkmode} />
+    <Alert alert={alert} /> 
   
     <div className="container my-3">
           <Routes>
-            {/* /users ---> Component 1 
-            /users/home ---> Component 2 */}
-              <Route exact path="/"  element={<TextForm  mode={mode} showAlert={showAlert} heading=" TextAnalyzer "/>} />
-              <Route exact path='/about' element={<AboutNew mode={mode}/>}/>
+              <Route exact path="/"  element={<TextForm  darkmode={darkmode} showAlert={showAlert} setAlert={setAlert} heading=" TextAnalyzer"></TextForm>} />
+              <Route exact path='/about' element={<About darkmode={darkmode}/>}/>
         </Routes>
       </div>
+      <Footer darkmode={darkmode}/>
       </BrowserRouter>
     </>
   );
