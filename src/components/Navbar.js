@@ -1,17 +1,12 @@
-// rfc // reactFunctionalComponent
 import React from 'react'
-// impt //importPropTypes
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-
-export default function Navbar(props) {
-
+export default function Navbar({title,aboutText,mode="light",toggleMode}) {
 
   return (
-    <nav className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}>
+    <nav className={`navbar navbar-expand-lg navbar-${ mode ?mode : 'light'} bg-${mode ?mode : 'light'}`}>
     <div className="container-fluid">
-      <Link className="navbar-brand" to="/">{props.title}</Link>
+      <Link className="navbar-brand" to="/">{title}</Link>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -21,33 +16,17 @@ export default function Navbar(props) {
             <Link className="nav-link "  aria-current="page" to="/">Home</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link " to="/about">{props.aboutText}</Link>
+            <Link className="nav-link " to="/about">{aboutText}</Link>
           </li>
-          
         </ul>
-        {/* <form className="d-flex">
-          <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-          <button className="btn btn-outline-primary" type="submit">Search</button>
-        </form> */}
 
-
-          <div className={`form-check form-switch text-${props.mode==="light" ? "dark" : "light"}`}>
-          <input className="form-check-input" onClick={props.toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
-          <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Enable {props.mode==="light" ? "dark" : "light"} Mode</label>
+          {/* <div className={`form-check form-switch text-${mode==="light" ? "dark" : "light"}`}> */}
+          <div className={`form-check form-switch text-${mode?(mode==="light" ? "dark" : "light"): "dark"}`}>
+          <input className="form-check-input" onClick={toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault" defaultChecked/>
+          <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Enable {mode?(mode==="light" ? "Dark" : "Light"): "Light"} Mode</label>
       </div>
       </div>
     </div>
   </nav>
   )
-}
-// pts //propTypeString
-Navbar.propTypes = { 
-    title: PropTypes.string,
-        // title: PropTypes.string.isRequired,
-    aboutText : PropTypes.string
-    }
-
-Navbar.defaultProps = {
-    title : "Set title here",
-    aboutText: "About"
 }

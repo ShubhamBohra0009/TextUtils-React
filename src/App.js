@@ -1,24 +1,15 @@
-import './App.css';
+import React, {useEffect, useRef, useState} from 'react'
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-// import About from './components/About';
 import AboutNew from './components/AboutNew';
 import Alert from './components/Alert';
-import React, {useState} from 'react'
-// import {Routes} from 'react-router-dom';
-
-import {
-  BrowserRouter as Router,
-  // Switch,
-  Route,
-  Routes,
-  // Link
-} from "react-router-dom";
+import {BrowserRouter,Route,Routes} from "react-router-dom";
 
 function App() {
 
-  const [mode, setMode] = useState('light'); // Whether dark mode is enabled or not
+  const [mode, setMode] = useState('dark'); // Whether dark mode is enabled or not
   const [alert, setAlert] = useState(null);  
+  const renderCount = useRef(0);
 
  const showAlert = (message,type)=>{
   setAlert({
@@ -29,40 +20,57 @@ function App() {
     setAlert(null);
   }, 1500);
  };
-
-  const toggleMode = ()=>{
-    if(mode === 'light'){
-      setMode("dark");
+ 
+ useEffect((e) => {
+  if(mode === "light" ){
+    document.body.style.backgroundColor = 'white';
+    showAlert("Light mode has been enabled", "success");
+      // document.title = 'TextAnalyzer - Light Mode'
+    renderCount.current+=1;
+  }
+  else if(mode === "dark"){
       document.body.style.backgroundColor = '#042743';
-      // document.body.style.backgroundColor = 'grey';
-      showAlert("Dark mode has been enabled", "success");
-      // document.title = 'TextUtils - Dark Mode'
+     if(renderCount.current>0){
+       showAlert("Dark mode has been enabled", "success");
+     }
+    //  document.title = 'TextAnalyzer - Dark Mode'
+    }
+    
+  },[mode])
+ 
+
+ const toggleMode = (e)=>{
+    // e.stopPropagation();
+    if(mode === 'dark'){
+      setMode("light");
+    //   document.body.style.backgroundColor = '#042743';
+    //   // document.body.style.backgroundColor = 'grey';
+    //   showAlert("Dark mode has been enabled", "success");
+    //   // document.title = 'TextAnalyzer - Dark Mode'
     }
     else{
-      setMode("light");
-      document.body.style.backgroundColor = 'white';
-      showAlert("Light mode has been enabled", "success");
-      // document.title = 'TextUtils - Light Mode'
+      setMode("dark");
+    //   document.body.style.backgroundColor = 'white';
+    //   showAlert("Light mode has been enabled", "success");
+    //   // document.title = 'TextAnalyzer - Light Mode'
     }
   }
 
   return (
     <>
-    <Router>
-<Navbar title="TextUtils" aboutText="About" mode={mode} toggleMode={toggleMode}/>
-<Alert alert={alert}/> 
+    <BrowserRouter>
+    <Navbar title="TextAnalyzer" aboutText="About" mode={mode} toggleMode={toggleMode}/>
+    <Alert alert={alert}/> 
   
-<div className="container my-3">
+    <div className="container my-3">
           <Routes>
             {/* /users ---> Component 1 
             /users/home ---> Component 2 */}
+              <Route exact path="/"  element={<TextForm  mode={mode} showAlert={showAlert} heading=" TextAnalyzer "/>} />
               <Route exact path='/about' element={<AboutNew mode={mode}/>}/>
-              <Route exact path="/"  element={<TextForm  mode={mode} showAlert={showAlert} heading=" Try TextUtils - Word Counter, Character Counter, Remove extra spaces"/>} />
         </Routes>
-{/* <About mode={mode}/> */}
-</div>
-    </Router>
-
+      </div>
+      </BrowserRouter>
     </>
   );
 }
